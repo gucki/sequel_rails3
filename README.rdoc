@@ -1,0 +1,55 @@
+=About
+
+This gem provides the railtie that allows sequel to hook into rails 3.x and thus behave like a rails framework component. Just like activerecord does in rails, sequel_rails3 uses the railtie API to hook into rails. The two are actually hooked into rails almost identically.
+
+The code for this gem was inspired by sequel-rails and activerecord of rails. 
+==Install
+
+Simply install it as any other gem:
+
+  gem install sequel_rails3
+
+Or when using bundler, add it got your Gemfile:
+
+  gem sequel_rails3
+
+==Quick Start
+
+In every rails project edit config/application.rb file as this.
+
+Comment out (or remove) this line:
+  
+  require 'rails/all'
+  
+Insert these lines:
+
+  require "action_controller/railtie"
+  require "action_mailer/railtie"
+  require "sequel_rails3/railtie"
+
+==Features
+
+* Clean implementation with new codebase
+* Full replacement for ActiveRecord
+* Working, colored logging of queries
+* Support for JDBC/DO (especially usefull when using jruby)
+
+==Todo
+
+* Source documentation (rdoc)
+* Support migrations and rake tasks
+* Tests
+
+==Contributing
+
+If you'd like to contribute a feature or bugfix: Thanks! To make sure your
+fix/feature has a high chance of being included, please read the following
+guidelines:
+
+1. Fork the project.
+2. Make your feature addition or bug fix.
+3. Add tests for it. This is important so we don’t break anything in a future version unintentionally.
+4. Commit, do not mess with rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+5. Send me a pull request. Bonus points for topic branches.
+
+
