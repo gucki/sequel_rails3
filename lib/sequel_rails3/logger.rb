@@ -39,12 +39,6 @@ module SequelRails3
       logger.debug "  #{name}  #{sql}"
     end
 
-    def self.error(message)
-      return unless logger
-
-      logger.error(message)
-    end
-
     def self.odd?
       self.odd_or_even = !odd_or_even
     end
@@ -56,14 +50,9 @@ module Sequel
     def log_yield(sql, args = nil)
       sql = "#{sql}; #{args.inspect}" if args
       start = Time.now
-      begin
-        yield
-      rescue => e
-        SequelRails3::Logger.error("#{e.class}: #{e.message.strip}: #{sql}")
-        raise
-      ensure
-        SequelRails3::Logger.debug(sql, Time.now-start) unless e
-      end
+      result = yield
+      SequelRails3::Logger.debug(sql, Time.now-start)
+      result
     end
   end
 end
