@@ -9,18 +9,39 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Corin Langosch"]
-  s.date = %q{2010-09-29}
+  s.date = %q{2010-09-30}
   s.description = %q{Sequel plugin which provides geo distance-based filters and distance calculation functionality for model.}
   s.email = %q{info@netskin.com}
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
   ]
+  s.files = [
+    ".document",
+     ".gitignore",
+     "LICENSE",
+     "README.rdoc",
+     "Rakefile",
+     "VERSION",
+     "lib/sequel_rails3.rb",
+     "lib/sequel_rails3/configuration.rb",
+     "lib/sequel_rails3/logger.rb",
+     "lib/sequel_rails3/railtie.rb",
+     "lib/sequel_rails3/railties/controller_runtime.rb",
+     "sequel_rails3.gemspec",
+     "spec/sequel_rails3_spec.rb",
+     "spec/spec.opts",
+     "spec/spec_helper.rb"
+  ]
   s.homepage = %q{http://github.com/gucki/sequel_rails3}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Use sequel as a replacement for activerecord with rails 3}
+  s.test_files = [
+    "spec/spec_helper.rb",
+     "spec/sequel_rails3_spec.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
