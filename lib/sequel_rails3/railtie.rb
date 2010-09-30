@@ -17,7 +17,7 @@ module SequelRails3
 
       Sequel::Model.plugin :active_model
 
-      self.db = Sequel.connect(config)
+      self.db = config[:url] ? Sequel.connect(config[:url], config) : Sequel.connect(config)
     end
 
     initializer 'sequel_rails3.logging', :after => :initialize_logger do |app|
