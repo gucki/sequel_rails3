@@ -1,4 +1,5 @@
 require 'sequel'
+require 'sequel/model'
 require 'rails'
 require 'sequel_rails3/configuration'
 require 'sequel_rails3/logger'
