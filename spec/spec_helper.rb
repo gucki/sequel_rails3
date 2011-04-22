@@ -1,9 +1,10 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'sequel_rails3'
-require 'spec'
-require 'spec/autorun'
+require 'rubygems'
+require 'bundler/setup'
 
-Spec::Runner.configure do |config|
-  
+require 'rails'
+require 'active_support/all'
+
+require 'sequel_rails3'
+
+RSpec.configure do |config|
 end
