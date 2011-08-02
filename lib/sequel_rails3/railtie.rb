@@ -44,6 +44,7 @@ module SequelRails3
       case action
         when :dump
           File.open(File.join(Rails.root, 'db', 'schema.rb'), "w") do |f|
+            f.write("# Database schema version: #{migrator.current}\n")
             f.write(db.dump_schema_migration)
           end
         else
