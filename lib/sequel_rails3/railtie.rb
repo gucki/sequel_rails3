@@ -31,5 +31,24 @@ module SequelRails3
         include SequelRails3::Railties::ControllerRuntime
       end
     end
+
+    def self.migrator
+      Sequel::IntegerMigrator.new(db, File.join(Rails.root, 'db', 'migrate'))
+    end
+
+    def self.migrate_to(version)
+      Sequel::IntegerMigrator.apply(db, File.join(Rails.root, 'db', 'migrate'), version)
+    end
+
+    def self.schema(action)
+      case action
+        when :dump
+          File.open(File.join(Rails.root, 'db', 'schema.rb'), "w") do |f|
+            f.write(db.dump_schema_migration)
+          end
+        else
+          eval(File.read(File.join(Rails.root, 'db', 'schema.rb'))).apply(db, action)
+      end
+    end
   end
 end
