@@ -24,7 +24,7 @@ namespace :db do
 
   namespace :schema do
     desc "Drops the schema from db/schema.rb."
-    task :drop => [:load_config, :dump] do
+    task :drop => :load_config do
       SequelRails3::Railtie.schema(:down)
       puts "Database schema dropped."
     end
