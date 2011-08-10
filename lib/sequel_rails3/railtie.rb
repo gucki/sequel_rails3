@@ -52,9 +52,7 @@ module SequelRails3
           eval(migration).apply(db, :up)
           db[:schema_info].insert(:version => version)
         when :down
-          migration, version = read_schema
-          db_version = db[:schema_info].select(:version).first.try(:[], :version)
-          raise RuntimeError, "schema version in schema file (#{version}) differs from version in database (#{db_version})" unless version == db_version
+          migration = db.dump_schema_migration
           eval(migration).apply(db, :down)
         else
           raise ArgumentError, "invalid schema action '#{action}'"
