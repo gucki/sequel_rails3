@@ -43,13 +43,34 @@ module SequelRails3
     def self.schema(action)
       case action
         when :dump
-          File.open(File.join(Rails.root, 'db', 'schema.rb'), "w") do |f|
+          File.open(schema_file, "w") do |f|
             f.write("# Database schema version: #{migrator.current}\n")
             f.write(db.dump_schema_migration)
           end
+        when :up
+          migration, version = read_schema
+          eval(migration).apply(db, :up)
+          db[:schema_info].insert(:version => version)
+        when :down
+          migration, version = read_schema
+          db_version = db[:schema_info].select(:version).first.try(:[], :version)
+          raise RuntimeError, "schema version in schema file (#{version}) differs from version in database (#{db_version})" unless version == db_version
+          eval(migration).apply(db, :down)
         else
-          eval(File.read(File.join(Rails.root, 'db', 'schema.rb'))).apply(db, action)
+          raise ArgumentError, "invalid schema action '#{action}'"
       end
+    end
+
+    def self.schema_file
+      File.join(Rails.root, 'db', 'schema.rb')
+    end
+
+    def self.read_schema
+      data = File.read(schema_file)
+      version = data.match(/# Database schema version: (\d+)\n/)[1]
+      raise RuntimeError, "unable to determine schema version from schema file" unless version
+      [data, version.to_i]
     end
   end
 end
+
