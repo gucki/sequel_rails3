@@ -59,7 +59,6 @@ namespace :db do
     task :redo => :load_config do
       Rake::Task["db:rollback"].invoke
       Rake::Task["db:migrate"].invoke
-      Rake::Task["db:schema:dump"].invoke
     end
 
     desc 'Runs the "up" for a given migration VERSION=x or STEP=x (default 1).'
